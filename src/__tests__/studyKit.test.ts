@@ -36,6 +36,17 @@ describe("Study Kit Validation & Problem Statement Alignment", () => {
       "State Kahn's in-degree 0 invariant when describing topological sort."
     ],
     detectedDeadlines: [],
+    examQuestions: [
+      {
+        id: "eq-1",
+        question: "Explain the Dijkstra non-negative weight constraint and its invariant.",
+        questionType: "Conceptual Breakdown",
+        relevanceScore: "High Yield (98%)",
+        marks: 5,
+        modelAnswer: "Dijkstra relies on greedy monotonic distances. Negative weights invalidate previously relaxed vertices.",
+        keyRubricPoints: ["Mention greedy invariant", "Contrast with Bellman-Ford"]
+      }
+    ],
     quiz: [
       {
         id: "q1",
@@ -161,5 +172,7 @@ describe("Study Kit Validation & Problem Statement Alignment", () => {
     expect(md).toContain("## 💡 Core Concepts & Formulations");
     expect(md).toContain("## 🧠 5-Question Active Recall Practice Quiz");
     expect(md).toContain("Question 1:");
+    expect(md).toContain("## 📝 Possible Exam Questions & Step-by-Step Solutions");
+    expect(md).toContain("[Conceptual Breakdown]");
   });
 });

@@ -20,6 +20,14 @@ function toICalDateTime(dateStr: string, timeStr?: string): string {
   return `${year}${month}${day}T${hour}${min}00Z`;
 }
 
+function escapeICalText(text: string): string {
+  return text
+    .replace(/\\/g, "\\\\")
+    .replace(/;/g, "\\;")
+    .replace(/,/g, "\\,")
+    .replace(/\r?\n/g, "\\n");
+}
+
 /**
  * Generates an RFC 5545 standard .ics file string for a list of student tasks.
  */
@@ -30,7 +38,7 @@ export function generateICalendarFile(tasks: Task[], calendarTitle = "Student Wo
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
     "PRODID:-//AI-Powered Student Workspace//EN",
-    `X-WR-CALNAME:${calendarTitle}`,
+    `X-WR-CALNAME:${escapeICalText(calendarTitle)}`,
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
   ];
@@ -38,11 +46,8 @@ export function generateICalendarFile(tasks: Task[], calendarTitle = "Student Wo
   tasks.forEach((task) => {
     const start = toICalDateTime(task.dueDate, task.dueTime);
     const end = start; // Point-in-time deadline
-    const cleanDesc = (task.description || `Course: ${task.course} | Priority: ${task.priority.toUpperCase()}`)
-      .replace(/\n/g, "\\n")
-      .replace(/,/g, "\\,")
-      .replace(/;/g, "\\;");
-    const cleanTitle = `[${task.course}] ${task.title}`.replace(/,/g, "\\,").replace(/;/g, "\\;");
+    const cleanDesc = escapeICalText(task.description || `Course: ${task.course} | Priority: ${task.priority.toUpperCase()}`);
+    const cleanTitle = escapeICalText(`[${task.course}] ${task.title}`);
 
     ics.push(
       "BEGIN:VEVENT",

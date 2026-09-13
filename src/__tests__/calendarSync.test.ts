@@ -58,4 +58,22 @@ describe("Calendar Synchronization & RFC 5545 Compliance", () => {
     expect(url).toContain(encodeURIComponent("[CS 201] Problem Set 4: Graph Theory"));
     expect(url).toContain("dates=20261015/20261015");
   });
+
+  it("safely escapes backslashes, semicolons, commas, and newlines in RFC 5545 text fields", () => {
+    const taskWithSpecialChars: Task = {
+      id: "task-special",
+      title: "Math & Logic: Section 1, Part A; Notes",
+      description: "Line 1 with backslash: C:\\notes\nLine 2 with comma, and semicolon;",
+      dueDate: "2026-11-01",
+      priority: "medium",
+      category: "reading",
+      course: "MATH 101",
+      completed: false,
+      createdAt: "2026-10-01T00:00:00Z"
+    };
+
+    const ics = generateICalendarFile([taskWithSpecialChars]);
+    expect(ics).toContain("SUMMARY:[MATH 101] Math & Logic: Section 1\\, Part A\\; Notes");
+    expect(ics).toContain("Line 1 with backslash: C:\\\\notes\\nLine 2 with comma\\, and semicolon\\;");
+  });
 });

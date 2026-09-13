@@ -47,6 +47,24 @@ export function exportLectureToMarkdown(summary: LectureSummary): string {
     });
   }
 
+  if (summary.examQuestions && summary.examQuestions.length > 0) {
+    md += `## 📝 Possible Exam Questions & Step-by-Step Solutions\n`;
+    summary.examQuestions.forEach((eq, idx) => {
+      md += `### ${idx + 1}. [${eq.questionType}] ${eq.question} (${eq.marks} Marks - ${eq.relevanceScore})\n\n`;
+      md += `**Model Answer:**\n${eq.modelAnswer}\n\n`;
+      if (eq.keyRubricPoints && eq.keyRubricPoints.length > 0) {
+        md += `**Marking Rubric:**\n`;
+        eq.keyRubricPoints.forEach((r) => {
+          md += `- ${r}\n`;
+        });
+        md += `\n`;
+      }
+      if (eq.commonPitfalls) {
+        md += `> ⚠️ **Common Pitfalls:** ${eq.commonPitfalls}\n\n`;
+      }
+    });
+  }
+
   return md;
 }
 
