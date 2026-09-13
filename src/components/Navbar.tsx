@@ -101,9 +101,11 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Left: Sidebar Toggle & Active Section Title */}
         <div className="flex items-center gap-3">
           <button
+            id="navbar-toggle-sidebar-btn"
             onClick={onToggleSidebar}
-            className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors"
+            className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:outline-hidden transition-colors"
             title="Toggle sliding navigation panel"
+            aria-label="Toggle sliding navigation panel"
           >
             <Menu className="h-4 w-4" />
           </button>
@@ -142,10 +144,13 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Right: Quick Tab Pills + Push Notifications + Theme Toggle + Avatar */}
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Quick Tab Switcher on larger screens */}
-          <nav className="hidden xl:flex items-center gap-1.5 rounded-2xl bg-zinc-200/80 dark:bg-zinc-850 p-1.5 border border-zinc-300 dark:border-zinc-700">
+          <nav aria-label="Main Navigation Tabs" className="hidden xl:flex items-center gap-1.5 rounded-2xl bg-zinc-200/80 dark:bg-zinc-850 p-1.5 border border-zinc-300 dark:border-zinc-700">
             <button
+              id="navbar-tab-dashboard"
+              role="tab"
+              aria-selected={activeTab === "dashboard"}
               onClick={() => setActiveTab("dashboard")}
-              className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
+              className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:outline-hidden ${
                 activeTab === "dashboard"
                   ? "bg-indigo-300 text-indigo-950 dark:bg-indigo-900/90 dark:text-indigo-200 border-2 border-indigo-600 shadow-xs"
                   : "bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 hover:text-zinc-950 dark:hover:text-zinc-100 border border-zinc-200 dark:border-zinc-700"
@@ -154,8 +159,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               Dashboard
             </button>
             <button
+              id="navbar-tab-summarizer"
+              role="tab"
+              aria-selected={activeTab === "summarizer"}
               onClick={() => setActiveTab("summarizer")}
-              className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
+              className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:outline-hidden ${
                 activeTab === "summarizer"
                   ? "bg-indigo-300 text-indigo-950 dark:bg-indigo-900/90 dark:text-indigo-200 border-2 border-indigo-600 shadow-xs"
                   : "bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 hover:text-zinc-950 dark:hover:text-zinc-100 border border-zinc-200 dark:border-zinc-700"
@@ -164,8 +172,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               AI Summarizer
             </button>
             <button
+              id="navbar-tab-tasks"
+              role="tab"
+              aria-selected={activeTab === "tasks"}
               onClick={() => setActiveTab("tasks")}
-              className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer flex items-center gap-1 ${
+              className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer flex items-center gap-1 focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:outline-hidden ${
                 activeTab === "tasks"
                   ? "bg-indigo-300 text-indigo-950 dark:bg-indigo-900/90 dark:text-indigo-200 border-2 border-indigo-600 shadow-xs"
                   : "bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 hover:text-zinc-950 dark:hover:text-zinc-100 border border-zinc-200 dark:border-zinc-700"
@@ -181,8 +192,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               )}
             </button>
             <button
+              id="navbar-tab-calendar"
+              role="tab"
+              aria-selected={activeTab === "calendar"}
               onClick={() => setActiveTab("calendar")}
-              className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
+              className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:outline-hidden ${
                 activeTab === "calendar"
                   ? "bg-indigo-300 text-indigo-950 dark:bg-indigo-900/90 dark:text-indigo-200 border-2 border-indigo-600 shadow-xs"
                   : "bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 hover:text-zinc-950 dark:hover:text-zinc-100 border border-zinc-200 dark:border-zinc-700"
@@ -191,8 +205,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               Calendar
             </button>
             <button
+              id="navbar-tab-study-groups"
+              role="tab"
+              aria-selected={activeTab === "study-groups"}
               onClick={() => setActiveTab("study-groups")}
-              className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer ${
+              className={`rounded-xl px-3 py-1.5 text-xs font-bold transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:outline-hidden ${
                 activeTab === "study-groups"
                   ? "bg-indigo-300 text-indigo-950 dark:bg-indigo-900/90 dark:text-indigo-200 border-2 border-indigo-600 shadow-xs"
                   : "bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 hover:text-zinc-950 dark:hover:text-zinc-100 border border-zinc-200 dark:border-zinc-700"
@@ -205,9 +222,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Push notification toggle */}
           {pushStatus !== "granted" ? (
             <button
+              id="navbar-enable-alerts-btn"
               onClick={handleEnablePush}
               title="Enable browser push notifications for upcoming deadlines"
-              className="hidden items-center gap-1.5 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800 px-2.5 py-1.5 text-xs font-semibold text-zinc-800 dark:text-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-700 md:flex"
+              aria-label="Enable browser push notifications for upcoming deadlines"
+              className="hidden items-center gap-1.5 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800 px-2.5 py-1.5 text-xs font-semibold text-zinc-800 dark:text-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-700 focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:outline-hidden md:flex"
             >
               <Bell className="h-3.5 w-3.5 text-amber-600" />
               <span>Enable Alerts</span>
@@ -225,10 +244,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Notifications bell */}
           <div className="relative">
             <button
-              id="notifications-bell-btn"
+              id="navbar-notifications-bell-btn"
               onClick={() => setShowNotifications(!showNotifications)}
-              className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors"
-              aria-label="Notifications"
+              className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 focus-visible:ring-2 focus-visible:ring-indigo-600 focus-visible:outline-hidden transition-colors"
+              aria-label="View notifications"
             >
               <Bell className="h-4 w-4" />
               {unreadCount > 0 && (
