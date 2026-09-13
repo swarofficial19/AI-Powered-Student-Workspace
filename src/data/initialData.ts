@@ -236,7 +236,7 @@ export const INITIAL_STUDY_GROUPS: StudyGroupBoard[] = [
         author: "Alex Chen",
         avatar: "AC",
         time: "10:14 AM",
-        text: "Hey everyone! I just uploaded the Lecture 8 notes into our AI Workspace. It generated the 5-question practice quiz — make sure to test your recall on the negative weights trap!",
+        text: "Hey everyone! I just uploaded the Lecture 8 notes into Helpify. It generated the 5-question practice quiz and exam-oriented questions — check out question #2 on negative cycles!",
         likes: 3
       },
       {

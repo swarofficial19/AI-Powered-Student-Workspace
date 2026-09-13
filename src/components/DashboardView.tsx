@@ -16,8 +16,7 @@ import {
   ExternalLink,
   Target
 } from "lucide-react";
-import { Task, StudyGroupBoard } from "../types";
-import { UserProfile } from "../utils/firebaseAuth";
+import { Task, StudyGroupBoard, UserProfile } from "../types";
 import { getDeadlineUrgency } from "../utils/notifications";
 import { getGoogleCalendarEventUrl, downloadCalendarICS } from "../utils/calendarSync";
 
@@ -64,7 +63,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </span>
             </div>
 
-            <h1 className="font-display text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-white">
+            <h1 className="font-display text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-zinc-100">
               Hello, {user.displayName || "Student"}! 👋
             </h1>
             <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 max-w-xl">
@@ -80,7 +79,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           <div className="flex flex-wrap items-center gap-2.5">
             <button
               onClick={() => onSelectTab("summarizer")}
-              className="flex items-center gap-2 rounded-2xl bg-indigo-600 px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-indigo-500/20 hover:bg-indigo-700 transition-all hover:scale-[1.02]"
+              className="flex items-center gap-2 rounded-2xl bg-indigo-700 dark:bg-indigo-600 px-4 py-2.5 text-xs font-bold text-zinc-100 shadow-md shadow-indigo-500/20 hover:bg-indigo-800 transition-all hover:scale-[1.02]"
             >
               <Sparkles className="h-4 w-4" />
               <span>Summarize Lecture PDF</span>
@@ -88,9 +87,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
 
             <button
               onClick={() => downloadCalendarICS(tasks)}
-              className="flex items-center gap-1.5 rounded-2xl border border-zinc-200 dark:border-zinc-750 bg-white dark:bg-zinc-800 px-3.5 py-2.5 text-xs font-bold text-zinc-700 dark:text-zinc-200 shadow-xs hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors"
+              className="flex items-center gap-1.5 rounded-2xl border border-zinc-300 dark:border-zinc-750 bg-zinc-200/80 dark:bg-zinc-800 px-3.5 py-2.5 text-xs font-bold text-zinc-800 dark:text-zinc-200 shadow-xs hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors"
             >
-              <Download className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+              <Download className="h-4 w-4 text-blue-700 dark:text-blue-400" />
               <span>Sync All to iCal (.ICS)</span>
             </button>
           </div>
@@ -102,21 +101,21 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Box 1: Lectures Synthesized (Indigo) */}
         <button
           onClick={() => onSelectTab("summarizer")}
-          className="group rounded-3xl border border-indigo-200/70 dark:border-indigo-900/40 bg-gradient-to-b from-indigo-50/50 to-white dark:from-indigo-950/30 dark:to-zinc-900 p-5 text-left shadow-xs hover:shadow-md hover:border-indigo-400 transition-all"
+          className="group rounded-3xl border border-indigo-200/70 dark:border-indigo-900/40 bg-gradient-to-b from-indigo-100/60 to-zinc-100 dark:from-indigo-950/30 dark:to-zinc-900 p-5 text-left shadow-xs hover:shadow-md hover:border-indigo-400 transition-all"
         >
           <div className="flex items-center justify-between">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-indigo-600 text-white shadow-md shadow-indigo-500/20">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-indigo-700 dark:bg-indigo-600 text-zinc-100 shadow-md shadow-indigo-500/20">
               <BookOpen className="h-5 w-5" />
             </div>
             <ArrowRight className="h-4 w-4 text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-black font-display text-zinc-900 dark:text-white">3</div>
-            <div className="text-xs font-bold text-indigo-700 dark:text-indigo-400 mt-0.5">
+            <div className="text-2xl font-black font-display text-zinc-900 dark:text-zinc-100">3</div>
+            <div className="text-xs font-bold text-indigo-800 dark:text-indigo-400 mt-0.5">
               Study Kits Ready
             </div>
-            <div className="text-[11px] text-zinc-400 dark:text-zinc-500 mt-0.5">
-              Notes & quizzes active
+            <div className="text-[11px] text-zinc-600 dark:text-zinc-400 mt-0.5 font-medium">
+              Notes, quizzes & exam Qs
             </div>
           </div>
         </button>
@@ -124,22 +123,22 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Box 2: Pending Tasks & Urgency (Amber) */}
         <button
           onClick={() => onSelectTab("tasks")}
-          className="group rounded-3xl border border-amber-200/70 dark:border-amber-900/40 bg-gradient-to-b from-amber-50/50 to-white dark:from-amber-950/30 dark:to-zinc-900 p-5 text-left shadow-xs hover:shadow-md hover:border-amber-400 transition-all"
+          className="group rounded-3xl border border-amber-200/70 dark:border-amber-900/40 bg-gradient-to-b from-amber-100/60 to-zinc-100 dark:from-amber-950/30 dark:to-zinc-900 p-5 text-left shadow-xs hover:shadow-md hover:border-amber-400 transition-all"
         >
           <div className="flex items-center justify-between">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-amber-500 text-white shadow-md shadow-amber-500/20">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-amber-600 text-zinc-100 shadow-md shadow-amber-500/20">
               <Clock className="h-5 w-5" />
             </div>
             <ArrowRight className="h-4 w-4 text-amber-400 opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-black font-display text-zinc-900 dark:text-white">
+            <div className="text-2xl font-black font-display text-zinc-900 dark:text-zinc-100">
               {urgentTasks.length}
             </div>
-            <div className="text-xs font-bold text-amber-700 dark:text-amber-400 mt-0.5">
+            <div className="text-xs font-bold text-amber-800 dark:text-amber-400 mt-0.5">
               Due in 48h
             </div>
-            <div className="text-[11px] text-zinc-400 dark:text-zinc-500 mt-0.5">
+            <div className="text-[11px] text-zinc-500 dark:text-zinc-500 mt-0.5">
               {pendingTasks.length} total pending
             </div>
           </div>
@@ -148,22 +147,22 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Box 3: Quiz Accuracy / Target (Emerald) */}
         <button
           onClick={() => onSelectTab("summarizer")}
-          className="group rounded-3xl border border-emerald-200/70 dark:border-emerald-900/40 bg-gradient-to-b from-emerald-50/50 to-white dark:from-emerald-950/30 dark:to-zinc-900 p-5 text-left shadow-xs hover:shadow-md hover:border-emerald-400 transition-all"
+          className="group rounded-3xl border border-emerald-200/70 dark:border-emerald-900/40 bg-gradient-to-b from-emerald-100/60 to-zinc-100 dark:from-emerald-950/30 dark:to-zinc-900 p-5 text-left shadow-xs hover:shadow-md hover:border-emerald-400 transition-all"
         >
           <div className="flex items-center justify-between">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-600 text-white shadow-md shadow-emerald-500/20">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-700 dark:bg-emerald-600 text-zinc-100 shadow-md shadow-emerald-500/20">
               <Target className="h-5 w-5" />
             </div>
             <ArrowRight className="h-4 w-4 text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-black font-display text-zinc-900 dark:text-white">
+            <div className="text-2xl font-black font-display text-zinc-900 dark:text-zinc-100">
               88%
             </div>
-            <div className="text-xs font-bold text-emerald-700 dark:text-emerald-400 mt-0.5">
+            <div className="text-xs font-bold text-emerald-800 dark:text-emerald-400 mt-0.5">
               Recall Accuracy
             </div>
-            <div className="text-[11px] text-zinc-400 dark:text-zinc-500 mt-0.5">
+            <div className="text-[11px] text-zinc-500 dark:text-zinc-500 mt-0.5">
               15 questions mastered
             </div>
           </div>
@@ -172,22 +171,22 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Box 4: Study Squads (Purple) */}
         <button
           onClick={() => onSelectTab("study-groups")}
-          className="group rounded-3xl border border-purple-200/70 dark:border-purple-900/40 bg-gradient-to-b from-purple-50/50 to-white dark:from-purple-950/30 dark:to-zinc-900 p-5 text-left shadow-xs hover:shadow-md hover:border-purple-400 transition-all"
+          className="group rounded-3xl border border-purple-200/70 dark:border-purple-900/40 bg-gradient-to-b from-purple-100/60 to-zinc-100 dark:from-purple-950/30 dark:to-zinc-900 p-5 text-left shadow-xs hover:shadow-md hover:border-purple-400 transition-all"
         >
           <div className="flex items-center justify-between">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-purple-600 text-white shadow-md shadow-purple-500/20">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-purple-700 dark:bg-purple-600 text-zinc-100 shadow-md shadow-purple-500/20">
               <Users className="h-5 w-5" />
             </div>
             <ArrowRight className="h-4 w-4 text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-black font-display text-zinc-900 dark:text-white">
+            <div className="text-2xl font-black font-display text-zinc-900 dark:text-zinc-100">
               {studyGroups.length}
             </div>
-            <div className="text-xs font-bold text-purple-700 dark:text-purple-400 mt-0.5">
+            <div className="text-xs font-bold text-purple-800 dark:text-purple-400 mt-0.5">
               Active Squads
             </div>
-            <div className="text-[11px] text-zinc-400 dark:text-zinc-500 mt-0.5">
+            <div className="text-[11px] text-zinc-500 dark:text-zinc-500 mt-0.5">
               7 peers collaborating
             </div>
           </div>
@@ -198,17 +197,17 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
         {/* Left Column: Urgent Deadlines & Calendar Snapshot (7 cols) */}
         <div className="space-y-6 lg:col-span-7">
-          <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 shadow-xs">
-            <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-3">
+          <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 p-5 shadow-xs">
+            <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3">
               <div className="flex items-center gap-2">
                 <Clock className="h-4 w-4 text-amber-500" />
-                <h2 className="font-display font-bold text-sm text-zinc-900 dark:text-white">
+                <h2 className="font-display font-bold text-sm text-zinc-900 dark:text-zinc-100">
                   Urgent & Upcoming Deadlines
                 </h2>
               </div>
               <button
                 onClick={() => onSelectTab("tasks")}
-                className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
+                className="text-xs font-bold text-indigo-700 dark:text-indigo-400 hover:underline flex items-center gap-1"
               >
                 <span>View All Tasks ({tasks.length})</span>
                 <ArrowRight className="h-3 w-3" />
@@ -223,14 +222,14 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
                     key={task.id}
                     className={`flex items-center justify-between rounded-2xl border p-3.5 transition-all ${
                       task.completed
-                        ? "border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50 opacity-60"
-                        : "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-indigo-300 dark:hover:border-indigo-700"
+                        ? "border-zinc-200 dark:border-zinc-800 bg-zinc-200/50 dark:bg-zinc-900/50 opacity-60"
+                        : "border-zinc-300 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 hover:border-indigo-400 dark:hover:border-indigo-700"
                     }`}
                   >
                     <div className="flex items-center gap-3">
                       <button
                         onClick={() => onToggleTask(task.id)}
-                        className="text-zinc-400 hover:text-indigo-600 transition-colors"
+                        className="text-zinc-500 hover:text-indigo-600 transition-colors"
                       >
                         {task.completed ? (
                           <CheckCircle2 className="h-5 w-5 text-indigo-600" />
@@ -279,43 +278,43 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </div>
 
           {/* Quick Launchpad to Core Tools */}
-          <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 shadow-xs">
-            <h2 className="font-display font-bold text-sm text-zinc-900 dark:text-white mb-3">
+          <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 p-5 shadow-xs">
+            <h2 className="font-display font-bold text-sm text-zinc-900 dark:text-zinc-100 mb-3">
               Quick Workspace Modules
             </h2>
 
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               <button
                 onClick={() => onSelectTab("summarizer")}
-                className="flex flex-col items-center justify-center rounded-2xl border border-indigo-100 dark:border-indigo-900/30 bg-indigo-50/40 dark:bg-indigo-950/20 p-4 text-center hover:bg-indigo-100/50 transition-colors"
+                className="flex flex-col items-center justify-center rounded-2xl border border-indigo-200 dark:border-indigo-900/30 bg-indigo-100/60 dark:bg-indigo-950/20 p-4 text-center hover:bg-indigo-200/60 transition-colors"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-600 text-white mb-2 shadow-xs">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-700 dark:bg-indigo-600 text-zinc-100 mb-2 shadow-xs">
                   <Sparkles className="h-5 w-5" />
                 </div>
-                <span className="text-xs font-bold text-zinc-900 dark:text-white">AI Summarizer</span>
-                <span className="text-[10px] text-zinc-500 mt-0.5">Notes & 5-MCQ Quiz</span>
+                <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100">AI Summarizer</span>
+                <span className="text-[10px] text-zinc-600 dark:text-zinc-400 mt-0.5">Notes & 5-MCQ Quiz</span>
               </button>
 
               <button
                 onClick={() => onSelectTab("calendar")}
-                className="flex flex-col items-center justify-center rounded-2xl border border-blue-100 dark:border-blue-900/30 bg-blue-50/40 dark:bg-blue-950/20 p-4 text-center hover:bg-blue-100/50 transition-colors"
+                className="flex flex-col items-center justify-center rounded-2xl border border-blue-200 dark:border-blue-900/30 bg-blue-100/60 dark:bg-blue-950/20 p-4 text-center hover:bg-blue-200/60 transition-colors"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white mb-2 shadow-xs">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-700 dark:bg-blue-600 text-zinc-100 mb-2 shadow-xs">
                   <CalendarIcon className="h-5 w-5" />
                 </div>
-                <span className="text-xs font-bold text-zinc-900 dark:text-white">Calendar Sync</span>
-                <span className="text-[10px] text-zinc-500 mt-0.5">Month Grid & iCal</span>
+                <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100">Calendar Sync</span>
+                <span className="text-[10px] text-zinc-600 dark:text-zinc-400 mt-0.5">Month Grid & iCal</span>
               </button>
 
               <button
                 onClick={() => onSelectTab("study-groups")}
-                className="flex flex-col items-center justify-center rounded-2xl border border-purple-100 dark:border-purple-900/30 bg-purple-50/40 dark:bg-purple-950/20 p-4 text-center hover:bg-purple-100/50 transition-colors"
+                className="flex flex-col items-center justify-center rounded-2xl border border-purple-200 dark:border-purple-900/30 bg-purple-100/60 dark:bg-purple-950/20 p-4 text-center hover:bg-purple-200/60 transition-colors"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-600 text-white mb-2 shadow-xs">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-purple-700 dark:bg-purple-600 text-zinc-100 mb-2 shadow-xs">
                   <Users className="h-5 w-5" />
                 </div>
-                <span className="text-xs font-bold text-zinc-900 dark:text-white">Study Squads</span>
-                <span className="text-[10px] text-zinc-500 mt-0.5">Peer Q&A & Tasks</span>
+                <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100">Study Squads</span>
+                <span className="text-[10px] text-zinc-600 dark:text-zinc-400 mt-0.5">Peer Q&A & Tasks</span>
               </button>
             </div>
           </div>
@@ -324,63 +323,63 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Right Column: Pre-Loaded Study Kits & Squad Highlights (5 cols) */}
         <div className="space-y-6 lg:col-span-5">
           {/* Study Kits Ready */}
-          <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 shadow-xs">
-            <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-3">
+          <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 p-5 shadow-xs">
+            <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3">
               <div className="flex items-center gap-2">
-                <BookOpen className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
-                <h2 className="font-display font-bold text-sm text-zinc-900 dark:text-white">
+                <BookOpen className="h-4 w-4 text-indigo-700 dark:text-indigo-400" />
+                <h2 className="font-display font-bold text-sm text-zinc-900 dark:text-zinc-100">
                   Active Study Kits
                 </h2>
               </div>
               <button
                 onClick={() => onSelectTab("summarizer")}
-                className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline"
+                className="text-xs font-bold text-indigo-700 dark:text-indigo-400 hover:underline"
               >
                 + New Synthesis
               </button>
             </div>
 
             <div className="mt-4 space-y-3">
-              <div className="rounded-2xl border border-indigo-100 dark:border-indigo-900/40 bg-indigo-50/30 dark:bg-indigo-950/20 p-3.5">
+              <div className="rounded-2xl border border-indigo-200 dark:border-indigo-900/40 bg-indigo-100/40 dark:bg-indigo-950/20 p-3.5">
                 <div className="flex items-center justify-between">
-                  <span className="rounded-md bg-indigo-100 dark:bg-indigo-900/60 px-2 py-0.5 text-[10px] font-bold text-indigo-700 dark:text-indigo-300">
+                  <span className="rounded-md bg-indigo-200 dark:bg-indigo-900/60 px-2 py-0.5 text-[10px] font-bold text-indigo-800 dark:text-indigo-300">
                     CS 201
                   </span>
-                  <span className="text-[10px] text-zinc-400">Exam Mode</span>
+                  <span className="text-[10px] text-zinc-500">Exam Mode</span>
                 </div>
-                <h3 className="font-display font-bold text-xs text-zinc-900 dark:text-white mt-1.5">
+                <h3 className="font-display font-bold text-xs text-zinc-900 dark:text-zinc-100 mt-1.5">
                   Graph Traversal & Dijkstra's Algorithm
                 </h3>
-                <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">
+                <p className="text-[11px] text-zinc-600 dark:text-zinc-400 mt-0.5">
                   5 Takesaways • 5 Quiz Questions • Problem Set extracted
                 </p>
                 <div className="mt-2.5 flex items-center gap-2">
                   <button
                     onClick={() => onSelectTab("summarizer")}
-                    className="rounded-xl bg-indigo-600 px-3 py-1 text-[10px] font-bold text-white hover:bg-indigo-700"
+                    className="rounded-xl bg-indigo-700 dark:bg-indigo-600 px-3 py-1 text-[10px] font-bold text-zinc-100 hover:bg-indigo-800"
                   >
                     Open Kit
                   </button>
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-emerald-100 dark:border-emerald-900/40 bg-emerald-50/30 dark:bg-emerald-950/20 p-3.5">
+              <div className="rounded-2xl border border-emerald-200 dark:border-emerald-900/40 bg-emerald-100/40 dark:bg-emerald-950/20 p-3.5">
                 <div className="flex items-center justify-between">
-                  <span className="rounded-md bg-emerald-100 dark:bg-emerald-900/60 px-2 py-0.5 text-[10px] font-bold text-emerald-700 dark:text-emerald-300">
+                  <span className="rounded-md bg-emerald-200 dark:bg-emerald-900/60 px-2 py-0.5 text-[10px] font-bold text-emerald-800 dark:text-emerald-300">
                     BIO 110
                   </span>
-                  <span className="text-[10px] text-zinc-400">Cram Mode</span>
+                  <span className="text-[10px] text-zinc-500">Cram Mode</span>
                 </div>
-                <h3 className="font-display font-bold text-xs text-zinc-900 dark:text-white mt-1.5">
+                <h3 className="font-display font-bold text-xs text-zinc-900 dark:text-zinc-100 mt-1.5">
                   Cellular Respiration & Krebs Cycle
                 </h3>
-                <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">
+                <p className="text-[11px] text-zinc-600 dark:text-zinc-400 mt-0.5">
                   ATP Invariants • 5-Question Quiz • Lab Report due Friday
                 </p>
                 <div className="mt-2.5 flex items-center gap-2">
                   <button
                     onClick={() => onSelectTab("summarizer")}
-                    className="rounded-xl bg-emerald-600 px-3 py-1 text-[10px] font-bold text-white hover:bg-emerald-700"
+                    className="rounded-xl bg-emerald-700 dark:bg-emerald-600 px-3 py-1 text-[10px] font-bold text-zinc-100 hover:bg-emerald-800"
                   >
                     Open Kit
                   </button>
@@ -390,11 +389,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </div>
 
           {/* Study Squad Feed Highlight */}
-          <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 shadow-xs">
-            <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-3">
+          <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 p-5 shadow-xs">
+            <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3">
               <div className="flex items-center gap-2">
                 <Users className="h-4 w-4 text-purple-600 dark:text-purple-400" />
-                <h2 className="font-display font-bold text-sm text-zinc-900 dark:text-white">
+                <h2 className="font-display font-bold text-sm text-zinc-900 dark:text-zinc-100">
                   Study Squad Activity
                 </h2>
               </div>

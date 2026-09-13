@@ -1,6 +1,7 @@
 {
-  "name": "AI-Powered Student Workspace",
-  "description": "Smart student workspace with AI lecture summarization, auto-generated quizzes, automated deadline tracking, calendar sync, and shared study group boards.",
+  "name": "Helpify",
+  "description": "Smart student workspace with AI lecture summarization, auto-generated quizzes, exam-oriented question banks, automated deadline tracking, calendar sync, and shared study group boards.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
+

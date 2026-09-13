@@ -200,6 +200,93 @@ function generateSmartFallback(content: string, course: string, studyMode: strin
     }
   ];
 
+  // Tailor Possible Exam-Oriented Questions
+  const examQuestions = [
+    {
+      id: "eq-1",
+      question: `Define the primary governing framework of ${course} and explain its core operational invariants.`,
+      questionType: "Conceptual Breakdown",
+      relevanceScore: "High Yield (98% Exam Probability)",
+      marks: 5,
+      modelAnswer: `The primary framework is structured around the systematic transformation of input constraints into verified state outputs while minimizing asymptotic resource expenditure.\n\nKey components include:\n1. State Boundary Identification: Delineating the parameters within which the system maintains consistency.\n2. Inductive Progress: Proving that every subsequent operation strictly moves the state toward termination without cyclic divergence.\n3. Termination Guarantees: Verifying well-founded relations to ensure halts are executed in finite steps.`,
+      keyRubricPoints: [
+        "Precise definition of the system state and formal bounds (2 marks)",
+        "Explanation of inductive progress and termination guarantees (2 marks)",
+        "Clear mention of resource trade-offs or asymptotic bounds (1 mark)"
+      ],
+      commonPitfalls: "Students frequently describe the high-level concept without mentioning formal invariant conditions or termination guarantees."
+    },
+    {
+      id: "eq-2",
+      question: `Compare and contrast the primary representations or methodologies discussed in the lecture. Under what condition is each optimal?`,
+      questionType: "Compare & Contrast",
+      relevanceScore: "High Yield (94% Exam Probability)",
+      marks: 8,
+      modelAnswer: `When evaluating the two primary representations:\n\n• Representation A (Dense / Continuous):\n  - Space Complexity: O(N^2) quadratic allocation.\n  - Lookup Time: O(1) instantaneous direct addressing.\n  - Optimal Condition: Dense problem sets where relationship density approaches N^2 or matrix operations are leveraged.\n\n• Representation B (Sparse / Linked):\n  - Space Complexity: O(N + M) strictly proportional to active entities.\n  - Lookup Time: Proportional to local degree O(deg(v)).\n  - Optimal Condition: Real-world sparse instances where entities interact with a bounded subset of neighbors.\n\nConclusion: For massive graphs or models, Representation B prevents memory overflow, whereas Representation A provides cache-friendly dense numerical throughput.`,
+      keyRubricPoints: [
+        "Comparative table or side-by-side complexity analysis (3 marks)",
+        "Precise space and lookup bounds with Big-O notation (3 marks)",
+        "Concrete trade-off analysis determining when each is preferable (2 marks)"
+      ],
+      commonPitfalls: "Failing to state the exact Big-O complexity for both space and lookup operations."
+    },
+    {
+      id: "eq-3",
+      question: `Derive the mathematical or asymptotic complexity bounds for the core mechanism covered in the lecture notes.`,
+      questionType: "Analytical Derivation",
+      relevanceScore: "Midterm Core Question",
+      marks: 10,
+      modelAnswer: `Derivation of Master Complexity Bounds:\n\n1. Recurrence Formulation:\n   Let T(n) denote the execution time for problem size n.\n   T(n) = a * T(n/b) + f(n)\n   Where a represents the branching factor of recursive calls, and b is the division factor.\n\n2. Work at Each Recursion Level:\n   - Level 0 (Root): f(n) work\n   - Level i: a^i * f(n / b^i) work\n   - Depth of tree: log_b(n)\n\n3. Total Work Aggregation:\n   Evaluating the geometric series across all levels yields the closed-form complexity.\n   When leaf work dominates: T(n) = Theta(n^{log_b a}).\n   When root partition dominates: T(n) = Theta(f(n)).\n\n4. Conclusion:\n   This confirms the strict logarithmic and polynomial bounds under standard operating conditions.`,
+      keyRubricPoints: [
+        "Formal statement of the initial recurrence or equation (3 marks)",
+        "Step-by-step algebraic summation over tree depth or state levels (4 marks)",
+        "Correct final Big-O / Theta bound conclusion (3 marks)"
+      ],
+      commonPitfalls: "Jumping straight to the final Big-O notation without writing down the intermediate summation steps."
+    },
+    {
+      id: "eq-4",
+      question: `What critical edge condition causes standard algorithms or principles in this domain to fail, and what countermeasure must be applied?`,
+      questionType: "Edge-Case Analysis",
+      relevanceScore: "Common Trick Question (88%)",
+      marks: 6,
+      modelAnswer: `The critical failure occurs when negative transition weights or unbounded cycles are introduced into the environment.\n\n• Root Cause of Failure:\n  Standard greedy or monotone assumptions rely on the invariant that once a subproblem distance/cost is finalized, it can never decrease through subsequent transitions. Negative cycles violate this triangular inequality.\n\n• Required Countermeasure:\n  1. Detect negative cycle presence using relaxation algorithms (e.g. Bellman-Ford or augmented state checking).\n  2. Re-weight edges using potential functions (Johnson's Algorithm) if multiple queries are needed.\n  3. Terminate computation with an explicit cycle exception if an unbounded negative loop is encountered.`,
+      keyRubricPoints: [
+        "Clear identification of the failure condition (e.g. negative cycles, division by zero) (2 marks)",
+        "Mechanistic explanation of why the greedy or standard invariant breaks (2 marks)",
+        "Correct alternative algorithm or verification method (2 marks)"
+      ],
+      commonPitfalls: "Confusing negative edge weights with negative cycles. Negative edges can be handled; negative cycles cannot."
+    },
+    {
+      id: "eq-5",
+      question: `Explain how the concepts from this lecture directly integrate into real-world software architecture or industrial practice.`,
+      questionType: "Application / Case Study",
+      relevanceScore: "High Yield (85%)",
+      marks: 5,
+      modelAnswer: `In production systems, these principles govern large-scale distributed coordination:\n\n1. Caching & Memory Hierarchy: By utilizing sparse representations and locality of reference, modern distributed query engines reduce L3 cache misses and serialize payload sizes across RPC calls.\n2. Idempotence & Recovery: State validation invariants ensure that failed workers can replay event streams without corrupting central state.\n3. Scalability: Asymptotic efficiency enables sub-second routing across multi-million node topologies (such as global transit routing and social graph recommendation engines).`,
+      keyRubricPoints: [
+        "Identification of at least two concrete real-world systems (2 marks)",
+        "Explanation connecting theoretical bounds to hardware or network performance (2 marks)",
+        "Mention of fault tolerance or scalability implications (1 mark)"
+      ],
+      commonPitfalls: "Giving overly generic answers without linking specific mechanics (e.g. cache locality, Big-O) to the real-world application."
+    },
+    {
+      id: "eq-6",
+      question: `State two fundamental definitions or formulas introduced in this session and describe their physical or computational meaning.`,
+      questionType: "Short Answer / Definitions",
+      relevanceScore: "Standard Section A (95%)",
+      marks: 4,
+      modelAnswer: `Definition 1: Invariant Condition\n• Statement: A logical predicate that remains true across every execution loop or state transformation.\n• Significance: Establishes formal correctness proofs through mathematical induction.\n\nDefinition 2: Asymptotic Dominance\n• Statement: A function f(n) dominates g(n) if the limit of f(n)/g(n) as n -> infinity is greater than zero.\n• Significance: Directs computational optimization toward the true runtime bottleneck rather than low-order constants.`,
+      keyRubricPoints: [
+        "Accurate formal wording of each definition/formula (2 marks)",
+        "Clear explanation of why it matters in analysis or practice (2 marks)"
+      ],
+      commonPitfalls: "Using casual colloquial language rather than precise academic terminology."
+    }
+  ];
+
   return {
     title,
     course,
@@ -212,6 +299,7 @@ function generateSmartFallback(content: string, course: string, studyMode: strin
       "Practice drawing execution trace diagrams before writing out full proofs or implementations."
     ],
     quiz,
+    examQuestions,
     detectedDeadlines
   };
 }
@@ -248,7 +336,16 @@ Analyze the material thoroughly and return a structured JSON response with:
    - "options": array of 4 plausible options
    - "correctAnswerIndex": integer (0, 1, 2, or 3)
    - "explanation": concise reasoning why that answer is correct
-8. "detectedDeadlines": An array of actionable deadlines, upcoming assignments, exams, project milestones, or suggested study intervals extracted from the lecture or syllabus material. Each item must have:
+8. "examQuestions": An array of 6-8 Possible Exam-oriented Questions that professors or examiners could frame from this lecture document. Each question must include:
+   - "id": string (e.g. "eq-1")
+   - "question": clear exam question text
+   - "questionType": string (e.g. "Conceptual Breakdown", "Analytical Derivation", "Compare & Contrast", "Application / Case Study", "Short Answer")
+   - "relevanceScore": string (e.g. "High Yield (98% Exam Probability)", "Core Midterm Question")
+   - "marks": integer (e.g. 5, 8, 10)
+   - "modelAnswer": A comprehensive, step-by-step model answer that would receive 100% marks
+   - "keyRubricPoints": array of strings describing key points the examiner checks for
+   - "commonPitfalls": string describing common mistakes students make
+9. "detectedDeadlines": An array of actionable deadlines, upcoming assignments, exams, project milestones, or suggested study intervals extracted from the lecture or syllabus material. Each item must have:
    - "title": string
    - "dueDate": YYYY-MM-DD format (estimate reasonably based on context or within the next 2-14 days if not explicitly dated)
    - "priority": "high" | "medium" | "low"
@@ -315,6 +412,26 @@ Return ONLY valid JSON matching this schema.`;
             explanation: { type: Type.STRING },
           },
           required: ["id", "question", "options", "correctAnswerIndex", "explanation"],
+        },
+      },
+      examQuestions: {
+        type: Type.ARRAY,
+        items: {
+          type: Type.OBJECT,
+          properties: {
+            id: { type: Type.STRING },
+            question: { type: Type.STRING },
+            questionType: { type: Type.STRING },
+            relevanceScore: { type: Type.STRING },
+            marks: { type: Type.INTEGER },
+            modelAnswer: { type: Type.STRING },
+            keyRubricPoints: {
+              type: Type.ARRAY,
+              items: { type: Type.STRING },
+            },
+            commonPitfalls: { type: Type.STRING },
+          },
+          required: ["id", "question", "questionType", "modelAnswer", "keyRubricPoints"],
         },
       },
       detectedDeadlines: {

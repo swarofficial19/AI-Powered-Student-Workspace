@@ -23,12 +23,12 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({ toasts, onDismis
       {toasts.map((toast) => {
         const bgBorder =
           toast.type === "success"
-            ? "border-emerald-500/30 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-emerald-500/10"
+            ? "border-emerald-500/30 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-emerald-500/10"
             : toast.type === "warning"
-            ? "border-amber-500/30 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-amber-500/10"
+            ? "border-amber-500/30 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-amber-500/10"
             : toast.type === "error"
-            ? "border-rose-500/30 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-rose-500/10"
-            : "border-indigo-500/30 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-indigo-500/10";
+            ? "border-rose-500/30 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-rose-500/10"
+            : "border-indigo-500/30 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-indigo-500/10";
 
         const icon =
           toast.type === "success" ? (

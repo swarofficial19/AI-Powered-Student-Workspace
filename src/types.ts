@@ -2,6 +2,19 @@ export type PriorityLevel = "high" | "medium" | "low";
 export type TaskCategory = "assignment" | "exam" | "reading" | "project" | "lab";
 export type TaskStatus = "todo" | "in_progress" | "completed";
 
+export interface UserProfile {
+  uid: string;
+  displayName: string;
+  email: string;
+  photoURL?: string;
+}
+
+export const DEFAULT_USER_PROFILE: UserProfile = {
+  uid: "student-workspace-user",
+  displayName: "Student",
+  email: "student@helpify.workspace",
+};
+
 export interface Task {
   id: string;
   title: string;
@@ -40,6 +53,17 @@ export interface DetectedDeadline {
   notes: string;
 }
 
+export interface ExamQuestion {
+  id: string;
+  question: string;
+  questionType: string; // e.g. "Conceptual Breakdown", "Analytical Derivation", "Compare & Contrast", "Application / Case Study", "Short Answer"
+  relevanceScore: string; // e.g. "98% Probability", "Core Exam Focus", "High Yield"
+  marks: number; // e.g. 5, 8, 10
+  modelAnswer: string;
+  keyRubricPoints: string[];
+  commonPitfalls?: string;
+}
+
 export interface LectureSummary {
   id: string;
   title: string;
@@ -53,6 +77,7 @@ export interface LectureSummary {
   coreConcepts: CoreConcept[];
   examTips: string[];
   quiz: QuizQuestion[];
+  examQuestions?: ExamQuestion[];
   detectedDeadlines: DetectedDeadline[];
 }
 

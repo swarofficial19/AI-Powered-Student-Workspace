@@ -108,17 +108,17 @@ export const CalendarSyncView: React.FC<CalendarSyncViewProps> = ({
   return (
     <div className="space-y-6">
       {/* Calendar Header with Sync Actions */}
-      <div className="flex flex-col gap-4 rounded-3xl border border-blue-200 dark:border-blue-900/60 bg-gradient-to-r from-blue-50/80 via-white dark:via-zinc-900 to-indigo-50/80 dark:to-indigo-950/40 p-5 shadow-xs sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-4 rounded-3xl border border-blue-300 dark:border-blue-900/60 bg-gradient-to-r from-blue-100/90 via-zinc-100 dark:via-zinc-900 to-indigo-100/90 dark:to-indigo-950/40 p-5 shadow-xs sm:flex-row sm:items-center sm:justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1 rounded-full bg-blue-600 px-2.5 py-0.5 text-xs font-semibold text-white">
+            <span className="inline-flex items-center gap-1 rounded-full bg-blue-700 px-2.5 py-0.5 text-xs font-bold text-zinc-100">
               <CalendarIcon className="h-3 w-3" /> Synchronization Hub
             </span>
-            <span className="text-xs font-semibold uppercase tracking-wider text-blue-900 dark:text-blue-300">
+            <span className="text-xs font-bold uppercase tracking-wider text-blue-950 dark:text-blue-300">
               Cross-Platform Calendar Integration
             </span>
           </div>
-          <h1 className="mt-1 text-xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-2xl font-display">
+          <h1 className="mt-1 text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-2xl font-display">
             Integrated Academic Calendar
           </h1>
           <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400 sm:text-sm">
@@ -129,7 +129,7 @@ export const CalendarSyncView: React.FC<CalendarSyncViewProps> = ({
         <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => downloadCalendarICS(tasks, "academic_schedule.ics")}
-            className="flex items-center gap-1.5 rounded-xl bg-blue-600 px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-blue-700 transition-colors"
+            className="flex items-center gap-1.5 rounded-xl bg-blue-700 dark:bg-blue-600 px-3.5 py-2 text-xs font-bold text-zinc-100 shadow-xs hover:bg-blue-800 dark:hover:bg-blue-500 transition-colors"
           >
             <Download className="h-4 w-4" />
             <span>Download All (.ICS)</span>
@@ -140,28 +140,28 @@ export const CalendarSyncView: React.FC<CalendarSyncViewProps> = ({
       {/* Main Calendar & Day Inspector Grid */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
         {/* Left: Monthly Visual Calendar (8 cols) */}
-        <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 shadow-xs lg:col-span-8">
+        <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 p-5 shadow-xs lg:col-span-8">
           {/* Month Navigator */}
-          <div className="flex items-center justify-between pb-4 border-b border-zinc-100 dark:border-zinc-800">
-            <h2 className="text-base font-bold font-display text-zinc-900 dark:text-white">
+          <div className="flex items-center justify-between pb-4 border-b border-zinc-200 dark:border-zinc-800">
+            <h2 className="text-base font-bold font-display text-zinc-900 dark:text-zinc-100">
               {monthNames[month]} {year}
             </h2>
             <div className="flex items-center gap-1">
               <button
                 onClick={handlePrevMonth}
-                className="flex h-8 w-8 items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300"
+                className="flex h-8 w-8 items-center justify-center rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
               <button
                 onClick={() => setCurrentDate(new Date())}
-                className="rounded-xl border border-zinc-200 dark:border-zinc-700 px-3 py-1 text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800"
+                className="rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800 px-3 py-1 text-xs font-bold text-zinc-800 dark:text-zinc-200 hover:bg-zinc-300 dark:hover:bg-zinc-700"
               >
                 Today
               </button>
               <button
                 onClick={handleNextMonth}
-                className="flex h-8 w-8 items-center justify-center rounded-xl border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300"
+                className="flex h-8 w-8 items-center justify-center rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800 hover:bg-zinc-300 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200"
               >
                 <ChevronRight className="h-4 w-4" />
               </button>
@@ -169,7 +169,7 @@ export const CalendarSyncView: React.FC<CalendarSyncViewProps> = ({
           </div>
 
           {/* Day of Week Headers */}
-          <div className="mt-4 grid grid-cols-7 text-center text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
+          <div className="mt-4 grid grid-cols-7 text-center text-[11px] font-bold text-zinc-500 uppercase tracking-wider">
             <span>Sun</span>
             <span>Mon</span>
             <span>Tue</span>
@@ -192,19 +192,19 @@ export const CalendarSyncView: React.FC<CalendarSyncViewProps> = ({
                   onClick={() => setSelectedDateStr(day.dateStr)}
                   className={`min-h-[76px] rounded-2xl border p-1.5 text-left transition-all ${
                     isSelected
-                      ? "border-indigo-600 bg-indigo-50/70 dark:bg-indigo-950/40 shadow-xs ring-1 ring-indigo-600"
+                      ? "border-indigo-600 bg-indigo-200 dark:bg-indigo-950/40 shadow-xs ring-2 ring-indigo-600"
                       : isToday
-                      ? "border-amber-300 dark:border-amber-700 bg-amber-50/50 dark:bg-amber-950/30"
+                      ? "border-amber-400 dark:border-amber-700 bg-amber-100/70 dark:bg-amber-950/30"
                       : day.isCurrentMonth
-                      ? "border-zinc-100 dark:border-zinc-800/80 bg-white dark:bg-zinc-850 hover:border-zinc-300 dark:hover:border-zinc-700"
-                      : "border-transparent bg-zinc-50/40 dark:bg-zinc-900/30 text-zinc-300 dark:text-zinc-700"
+                      ? "border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-850 hover:border-zinc-400 dark:hover:border-zinc-700"
+                      : "border-transparent bg-zinc-200/50 dark:bg-zinc-900/30 text-zinc-400 dark:text-zinc-600"
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <span
                       className={`text-xs font-bold ${
                         isToday
-                          ? "flex h-5 w-5 items-center justify-center rounded-full bg-amber-500 text-white font-black"
+                          ? "flex h-5 w-5 items-center justify-center rounded-full bg-amber-600 text-zinc-100 font-black"
                           : day.isCurrentMonth
                           ? "text-zinc-800 dark:text-zinc-200"
                           : "text-zinc-400 dark:text-zinc-600"
@@ -214,7 +214,7 @@ export const CalendarSyncView: React.FC<CalendarSyncViewProps> = ({
                     </span>
 
                     {dayTasks.length > 0 && (
-                      <span className="rounded-full bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.2 text-[9px] font-bold text-zinc-600 dark:text-zinc-300">
+                      <span className="rounded-full bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.2 text-[9px] font-bold text-zinc-700 dark:text-zinc-300">
                         {dayTasks.length}
                       </span>
                     )}
@@ -233,7 +233,7 @@ export const CalendarSyncView: React.FC<CalendarSyncViewProps> = ({
                       return (
                         <div
                           key={t.id}
-                          className="flex items-center gap-1 truncate rounded px-1 py-0.5 text-[9px] font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200"
+                          className="flex items-center gap-1 truncate rounded px-1 py-0.5 text-[9px] font-medium bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200"
                         >
                           <span className={`h-1.5 w-1.5 rounded-full shrink-0 ${dotColor}`} />
                           <span className="truncate">{t.title}</span>
@@ -241,7 +241,7 @@ export const CalendarSyncView: React.FC<CalendarSyncViewProps> = ({
                       );
                     })}
                     {dayTasks.length > 2 && (
-                      <div className="text-[8px] font-bold text-zinc-400 pl-1">
+                      <div className="text-[8px] font-bold text-zinc-500 pl-1">
                         +{dayTasks.length - 2} more
                       </div>
                     )}
@@ -254,15 +254,15 @@ export const CalendarSyncView: React.FC<CalendarSyncViewProps> = ({
 
         {/* Right: Selected Day Inspector (4 cols) */}
         <div className="space-y-4 lg:col-span-4">
-          <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-5 shadow-xs">
-            <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-3">
+          <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 p-5 shadow-xs">
+            <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
                   Target Date Deliverables
                 </span>
-                <h3 className="text-sm font-bold font-mono text-zinc-900 dark:text-white">{selectedDateStr}</h3>
+                <h3 className="text-sm font-bold font-mono text-zinc-900 dark:text-zinc-100">{selectedDateStr}</h3>
               </div>
-              <span className="rounded-full bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 text-xs font-semibold text-zinc-600 dark:text-zinc-300">
+              <span className="rounded-full bg-zinc-200 dark:bg-zinc-800 px-2 py-0.5 text-xs font-semibold text-zinc-700 dark:text-zinc-300">
                 {selectedDayTasks.length} scheduled
               </span>
             </div>
@@ -271,9 +271,9 @@ export const CalendarSyncView: React.FC<CalendarSyncViewProps> = ({
             <div className="mt-4 space-y-3 max-h-[460px] overflow-y-auto">
               {selectedDayTasks.length === 0 ? (
                 <div className="py-12 text-center">
-                  <CalendarIcon className="mx-auto h-8 w-8 text-zinc-300 dark:text-zinc-600" />
-                  <p className="mt-2 text-xs font-bold text-zinc-700 dark:text-zinc-300">No deliverables on this date</p>
-                  <p className="mt-1 text-[11px] text-zinc-400">
+                  <CalendarIcon className="mx-auto h-8 w-8 text-zinc-400 dark:text-zinc-600" />
+                  <p className="mt-2 text-xs font-bold text-zinc-800 dark:text-zinc-200">No deliverables on this date</p>
+                  <p className="mt-1 text-[11px] text-zinc-500">
                     Click another date with colored indicators to view assignments.
                   </p>
                 </div>
@@ -282,29 +282,29 @@ export const CalendarSyncView: React.FC<CalendarSyncViewProps> = ({
                   const urgency = getDeadlineUrgency(task.dueDate, task.completed);
                   const priorityColor =
                     task.priority === "high"
-                      ? "text-rose-600 bg-rose-50 dark:bg-rose-950/30 border-rose-200 dark:border-rose-900"
+                      ? "text-rose-700 bg-rose-100 dark:bg-rose-950/30 border-rose-300 dark:border-rose-900"
                       : task.priority === "medium"
-                      ? "text-amber-600 bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-900"
-                      : "text-emerald-600 bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-900";
+                      ? "text-amber-800 bg-amber-100 dark:bg-amber-950/30 border-amber-300 dark:border-amber-900"
+                      : "text-emerald-800 bg-emerald-100 dark:bg-emerald-950/30 border-emerald-300 dark:border-emerald-900";
 
                   return (
                     <div
                       key={task.id}
-                      className="rounded-2xl border border-zinc-200 dark:border-zinc-800 p-3.5 space-y-2 bg-white dark:bg-zinc-850"
+                      className="rounded-2xl border border-zinc-300 dark:border-zinc-800 p-3.5 space-y-2 bg-zinc-50 dark:bg-zinc-850"
                     >
                       <div className="flex items-center justify-between">
                         <span className={`rounded border px-1.5 py-0.5 text-[9px] font-bold uppercase ${priorityColor}`}>
                           {task.priority} Priority
                         </span>
-                        <span className="text-[10px] font-semibold text-zinc-400 uppercase">
+                        <span className="text-[10px] font-semibold text-zinc-500 uppercase">
                           {task.category}
                         </span>
                       </div>
 
-                      <h4 className="text-xs font-bold text-zinc-900 dark:text-white leading-snug">{task.title}</h4>
-                      <p className="text-[11px] text-indigo-600 dark:text-indigo-400 font-medium">{task.course}</p>
+                      <h4 className="text-xs font-bold text-zinc-900 dark:text-zinc-100 leading-snug">{task.title}</h4>
+                      <p className="text-[11px] text-indigo-700 dark:text-indigo-400 font-medium">{task.course}</p>
                       {task.description && (
-                        <p className="text-[11px] text-zinc-500 dark:text-zinc-400">{task.description}</p>
+                        <p className="text-[11px] text-zinc-600 dark:text-zinc-400">{task.description}</p>
                       )}
 
                       <div className="flex items-center justify-between pt-2 border-t border-zinc-100 dark:border-zinc-800">

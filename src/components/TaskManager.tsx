@@ -135,10 +135,10 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
       {/* Top Header with Quick Metrics */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-2xl font-display">
+          <h1 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-2xl font-display">
             Task Management & Deadline Tracking
           </h1>
-          <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400 sm:text-sm">
+          <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400 sm:text-sm">
             Automated countdowns, priority tagging, and integrated calendar export for all assignments.
           </p>
         </div>
@@ -146,7 +146,7 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={() => downloadCalendarICS(tasks)}
-            className="flex items-center gap-1.5 rounded-xl border border-zinc-200 dark:border-zinc-750 bg-white dark:bg-zinc-800 px-3 py-2 text-xs font-semibold text-zinc-700 dark:text-zinc-200 shadow-xs hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors"
+            className="flex items-center gap-1.5 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800 px-3 py-2 text-xs font-bold text-zinc-800 dark:text-zinc-200 shadow-xs hover:bg-zinc-300 dark:hover:bg-zinc-700 transition-colors"
             title="Download .ics file to import directly into Apple Calendar, Google Calendar, or Outlook"
           >
             <Download className="h-3.5 w-3.5 text-indigo-600 dark:text-indigo-400" />
@@ -155,7 +155,7 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
 
           <button
             onClick={() => setShowAddModal(true)}
-            className="flex items-center gap-1.5 rounded-xl bg-indigo-600 px-3.5 py-2 text-xs font-bold text-white shadow-xs hover:bg-indigo-700 transition-colors"
+            className="flex items-center gap-1.5 rounded-xl bg-indigo-700 dark:bg-indigo-600 px-3.5 py-2 text-xs font-bold text-zinc-100 shadow-xs hover:bg-indigo-800 dark:hover:bg-indigo-500 transition-colors"
           >
             <Plus className="h-4 w-4" />
             <span>New Task</span>
@@ -165,11 +165,11 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
 
       {/* Metrics Row */}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-4 shadow-xs">
-          <div className="text-[11px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Total Tasks</div>
+        <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 p-4 shadow-xs">
+          <div className="text-[11px] font-bold text-zinc-600 dark:text-zinc-400 uppercase tracking-wider">Total Tasks</div>
           <div className="mt-1 flex items-baseline gap-2">
-            <span className="text-2xl font-black font-display text-zinc-900 dark:text-white">{stats.total}</span>
-            <span className="text-xs text-zinc-400">items</span>
+            <span className="text-2xl font-black font-display text-zinc-900 dark:text-zinc-100">{stats.total}</span>
+            <span className="text-xs text-zinc-500">items</span>
           </div>
         </div>
 
@@ -205,42 +205,48 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col gap-3 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-3.5 shadow-xs lg:flex-row lg:items-center lg:justify-between">
+      <div className="flex flex-col gap-3 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 p-3.5 shadow-xs lg:flex-row lg:items-center lg:justify-between">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-2.5 h-4 w-4 text-zinc-400" />
+          <Search className="absolute left-3 top-2.5 h-4 w-4 text-zinc-500" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search assignments, exams, or courses..."
-            className="w-full rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 py-1.5 pl-9 pr-3 text-xs text-zinc-900 dark:text-white focus:border-indigo-500 focus:outline-none"
+            className="w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800/60 py-1.5 pl-9 pr-3 text-xs text-zinc-900 dark:text-zinc-100 focus:border-indigo-500 focus:outline-none"
           />
         </div>
 
         {/* Filter controls */}
         <div className="flex flex-wrap items-center gap-2">
-          {/* Status filter */}
-          <div className="flex rounded-xl bg-zinc-100 dark:bg-zinc-800 p-0.5">
+          {/* Status filter tabs */}
+          <div className="flex rounded-xl bg-zinc-200 dark:bg-zinc-850 p-1 border border-zinc-300 dark:border-zinc-700">
             <button
               onClick={() => setFilterStatus("all")}
-              className={`rounded-lg px-2.5 py-1 text-[11px] font-bold ${
-                filterStatus === "all" ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-xs" : "text-zinc-600 dark:text-zinc-400"
+              className={`rounded-lg px-3 py-1 text-xs font-bold transition-all cursor-pointer ${
+                filterStatus === "all"
+                  ? "bg-indigo-300 text-indigo-950 dark:bg-indigo-900/90 dark:text-indigo-200 border-2 border-indigo-600 shadow-xs"
+                  : "bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 hover:text-zinc-950 dark:hover:text-zinc-100"
               }`}
             >
               All
             </button>
             <button
               onClick={() => setFilterStatus("active")}
-              className={`rounded-lg px-2.5 py-1 text-[11px] font-bold ${
-                filterStatus === "active" ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-xs" : "text-zinc-600 dark:text-zinc-400"
+              className={`rounded-lg px-3 py-1 text-xs font-bold transition-all cursor-pointer ${
+                filterStatus === "active"
+                  ? "bg-indigo-300 text-indigo-950 dark:bg-indigo-900/90 dark:text-indigo-200 border-2 border-indigo-600 shadow-xs"
+                  : "bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 hover:text-zinc-950 dark:hover:text-zinc-100"
               }`}
             >
               Pending
             </button>
             <button
               onClick={() => setFilterStatus("completed")}
-              className={`rounded-lg px-2.5 py-1 text-[11px] font-bold ${
-                filterStatus === "completed" ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-xs" : "text-zinc-600 dark:text-zinc-400"
+              className={`rounded-lg px-3 py-1 text-xs font-bold transition-all cursor-pointer ${
+                filterStatus === "completed"
+                  ? "bg-indigo-300 text-indigo-950 dark:bg-indigo-900/90 dark:text-indigo-200 border-2 border-indigo-600 shadow-xs"
+                  : "bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 hover:text-zinc-950 dark:hover:text-zinc-100"
               }`}
             >
               Done
@@ -251,7 +257,7 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
           <select
             value={filterPriority}
             onChange={(e) => setFilterPriority(e.target.value)}
-            className="rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-2 py-1 text-xs text-zinc-700 dark:text-zinc-200"
+            className="rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800 px-2.5 py-1.5 text-xs font-medium text-zinc-800 dark:text-zinc-200"
           >
             <option value="all">All Priorities</option>
             <option value="high">🔴 High Priority</option>
@@ -263,7 +269,7 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
           <select
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
-            className="rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-2 py-1 text-xs text-zinc-700 dark:text-zinc-200"
+            className="rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800 px-2.5 py-1.5 text-xs font-medium text-zinc-800 dark:text-zinc-200"
           >
             <option value="all">All Categories</option>
             <option value="assignment">Assignment</option>
@@ -277,7 +283,7 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
-            className="rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-2 py-1 text-xs text-zinc-700 dark:text-zinc-200"
+            className="rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800 px-2.5 py-1.5 text-xs font-medium text-zinc-800 dark:text-zinc-200"
           >
             <option value="urgency">Sort by Urgency</option>
             <option value="date">Sort by Due Date</option>
@@ -289,10 +295,10 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
       {/* Task List */}
       <div className="space-y-2.5">
         {filteredTasks.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-zinc-200 bg-white p-12 text-center">
-            <CheckCircle2 className="mx-auto h-8 w-8 text-zinc-300" />
-            <h3 className="mt-2 text-sm font-bold text-zinc-800">No tasks found</h3>
-            <p className="mt-1 text-xs text-zinc-500">
+          <div className="rounded-2xl border border-dashed border-zinc-300 bg-zinc-100 p-12 text-center">
+            <CheckCircle2 className="mx-auto h-8 w-8 text-zinc-400" />
+            <h3 className="mt-2 text-sm font-bold text-zinc-800 dark:text-zinc-200">No tasks found</h3>
+            <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
               Try adjusting your search or filters, or add a new assignment.
             </p>
           </div>
@@ -311,20 +317,20 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
                 key={task.id}
                 className={`group flex flex-col gap-3 rounded-2xl border p-4 transition-all sm:flex-row sm:items-center sm:justify-between ${
                   task.completed
-                    ? "border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/40 opacity-70"
-                    : "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-xs hover:border-indigo-300 dark:hover:border-indigo-750"
+                    ? "border-zinc-300 dark:border-zinc-800 bg-zinc-200/50 dark:bg-zinc-900/40 opacity-70"
+                    : "border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 shadow-xs hover:border-indigo-400 dark:hover:border-indigo-750"
                 }`}
               >
                 {/* Checkbox and details */}
                 <div className="flex items-start gap-3">
                   <button
                     onClick={() => handleToggleCompleted(task.id)}
-                    className="mt-0.5 text-zinc-400 hover:text-indigo-600 transition-colors"
+                    className="mt-0.5 text-zinc-500 hover:text-indigo-600 transition-colors"
                   >
                     {task.completed ? (
                       <CheckSquare className="h-5 w-5 text-indigo-600" />
                     ) : (
-                      <Square className="h-5 w-5 text-zinc-300 dark:text-zinc-600 hover:text-zinc-400" />
+                      <Square className="h-5 w-5 text-zinc-400 dark:text-zinc-600 hover:text-zinc-500" />
                     )}
                   </button>
 
@@ -333,7 +339,7 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
                       <span className={`rounded-md border px-2 py-0.5 text-[10px] font-bold uppercase ${priorityBadge}`}>
                         {task.priority} Priority
                       </span>
-                      <span className="rounded-md bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 text-[10px] font-semibold text-zinc-600 dark:text-zinc-300 uppercase">
+                      <span className="rounded-md bg-zinc-200 dark:bg-zinc-800 px-2 py-0.5 text-[10px] font-semibold text-zinc-700 dark:text-zinc-300 uppercase">
                         {task.category}
                       </span>
                       <span className="text-[11px] font-semibold text-indigo-700 dark:text-indigo-400">{task.course}</span>
@@ -341,14 +347,14 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
 
                     <h3
                       className={`text-sm font-bold leading-snug ${
-                        task.completed ? "text-zinc-400 dark:text-zinc-500 line-through" : "text-zinc-900 dark:text-white"
+                        task.completed ? "text-zinc-400 dark:text-zinc-500 line-through" : "text-zinc-900 dark:text-zinc-100"
                       }`}
                     >
                       {task.title}
                     </h3>
 
                     {task.description && (
-                      <p className="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-1">{task.description}</p>
+                      <p className="text-xs text-zinc-600 dark:text-zinc-400 line-clamp-1">{task.description}</p>
                     )}
                   </div>
                 </div>
@@ -370,7 +376,7 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
                       href={getGoogleCalendarEventUrl(task)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex h-8 items-center gap-1 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-2.5 text-[11px] font-medium text-zinc-600 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 hover:text-zinc-900 dark:hover:text-white"
+                      className="flex h-8 items-center gap-1 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800 px-2.5 text-[11px] font-bold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-700 hover:text-zinc-950 dark:hover:text-zinc-100"
                       title="Add this event to Google Calendar"
                     >
                       <Calendar className="h-3 w-3 text-blue-500" />
@@ -395,8 +401,8 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
       {/* Add Task Modal */}
       {showAddModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs">
-          <div className="w-full max-w-md rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 shadow-2xl">
-            <h3 className="text-base font-bold font-display text-zinc-900 dark:text-white">Add Academic Task or Assignment</h3>
+          <div className="w-full max-w-md rounded-3xl border border-zinc-300 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 p-6 shadow-2xl">
+            <h3 className="text-base font-bold font-display text-zinc-900 dark:text-zinc-100">Add Academic Task or Assignment</h3>
             <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
               Set priority tags and target deadlines with automated reminder triggers.
             </p>
@@ -410,7 +416,7 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
                   value={newTitle}
                   onChange={(e) => setNewTitle(e.target.value)}
                   placeholder="e.g., Problem Set 4: Dynamic Programming"
-                  className="mt-1 w-full rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 px-3 py-2 text-xs text-zinc-900 dark:text-white focus:border-indigo-500 focus:outline-none"
+                  className="mt-1 w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800/60 px-3 py-2 text-xs text-zinc-900 dark:text-zinc-100 focus:border-indigo-500 focus:outline-none"
                 />
               </div>
 
@@ -422,7 +428,7 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
                     required
                     value={newCourse}
                     onChange={(e) => setNewCourse(e.target.value)}
-                    className="mt-1 w-full rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 px-3 py-2 text-xs text-zinc-900 dark:text-white focus:border-indigo-500 focus:outline-none"
+                    className="mt-1 w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800/60 px-3 py-2 text-xs text-zinc-900 dark:text-zinc-100 focus:border-indigo-500 focus:outline-none"
                   />
                 </div>
 
@@ -433,7 +439,7 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
                     required
                     value={newDueDate}
                     onChange={(e) => setNewDueDate(e.target.value)}
-                    className="mt-1 w-full rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 px-3 py-2 text-xs text-zinc-900 dark:text-white focus:border-indigo-500 focus:outline-none"
+                    className="mt-1 w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800/60 px-3 py-2 text-xs text-zinc-900 dark:text-zinc-100 focus:border-indigo-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -444,7 +450,7 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
                   <select
                     value={newPriority}
                     onChange={(e) => setNewPriority(e.target.value as PriorityLevel)}
-                    className="mt-1 w-full rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 px-3 py-2 text-xs text-zinc-900 dark:text-white focus:border-indigo-500 focus:outline-none"
+                    className="mt-1 w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800/60 px-3 py-2 text-xs text-zinc-900 dark:text-zinc-100 focus:border-indigo-500 focus:outline-none"
                   >
                     <option value="high">🔴 High (Urgent)</option>
                     <option value="medium">🟡 Medium</option>
@@ -457,7 +463,7 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
                   <select
                     value={newCategory}
                     onChange={(e) => setNewCategory(e.target.value as TaskCategory)}
-                    className="mt-1 w-full rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 px-3 py-2 text-xs text-zinc-900 dark:text-white focus:border-indigo-500 focus:outline-none"
+                    className="mt-1 w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800/60 px-3 py-2 text-xs text-zinc-900 dark:text-zinc-100 focus:border-indigo-500 focus:outline-none"
                   >
                     <option value="assignment">Assignment</option>
                     <option value="exam">Exam</option>
@@ -475,21 +481,21 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
                   value={newDescription}
                   onChange={(e) => setNewDescription(e.target.value)}
                   placeholder="Additional syllabus notes or sub-tasks..."
-                  className="mt-1 w-full rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 px-3 py-2 text-xs text-zinc-900 dark:text-white focus:border-indigo-500 focus:outline-none"
+                  className="mt-1 w-full rounded-xl border border-zinc-300 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800/60 px-3 py-2 text-xs text-zinc-900 dark:text-zinc-100 focus:border-indigo-500 focus:outline-none"
                 />
               </div>
 
-              <div className="mt-5 flex items-center justify-end gap-2 pt-3 border-t border-zinc-100 dark:border-zinc-800">
+              <div className="mt-5 flex items-center justify-end gap-2 pt-3 border-t border-zinc-200 dark:border-zinc-800">
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="rounded-xl border border-zinc-200 dark:border-zinc-700 px-4 py-2 text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800"
+                  className="rounded-xl border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-800"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-indigo-600 px-4 py-2 text-xs font-bold text-white hover:bg-indigo-700 shadow-xs"
+                  className="rounded-xl bg-indigo-700 dark:bg-indigo-600 px-4 py-2 text-xs font-bold text-zinc-100 hover:bg-indigo-800 dark:hover:bg-indigo-500 shadow-xs"
                 >
                   Save Task
                 </button>
